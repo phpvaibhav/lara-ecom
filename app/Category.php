@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
      use SoftDeletes;
+    protected $guarded = [];
     protected $dates = ['deleted_at'];
 }

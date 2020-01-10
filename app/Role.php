@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model
 {
     use SoftDeletes;
+    protected $guarded = [];
     protected $dates = ['deleted_at'];
+ 	public function users(){
+        return $this->belogsToMany('App\User');
+    }
 }
