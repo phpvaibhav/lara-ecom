@@ -24,5 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['as'=>'admin.'],function(){
 	Route::get('/admin','AdminController@dashboard')->name('dashboard');
+	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+	Route::resource('product','ProductController');
 
 });

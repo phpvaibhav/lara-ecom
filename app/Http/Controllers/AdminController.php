@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use View;
 class AdminController extends Controller
 {
-    public function __construct(){
-
+    public function __construct()
+    {
+        $this->middleware(['auth','is_admin']);
     }
     public function dashboard(){
-   
-    	return View::make('backend_pages.blank');
+   		$data['front_scripts'] = array('js/pages/dashboard.js');
+    	return View::make('backend_pages.dashboard',$data);
     }//end function
 }

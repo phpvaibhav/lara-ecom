@@ -13,6 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if(Session::has('fail'))
+                    <div class="alert alert-danger">
+                    {{Session::get('fail')}}
+                    </div>
+                    @endif
 
                     You are logged in!
                 </div>

@@ -9,7 +9,7 @@
 		<!-- begin:: Header Mobile -->
 		<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 			<div class="kt-header-mobile__logo">
-				<a href="index.html">
+				<a href="{{route('admin.dashboard')}}">
 					<img alt="Logo" src="{{asset('backend_assets/media/logos/logo-12.png')}}" />
 				</a>
 			</div>
@@ -27,7 +27,7 @@
 					<!-- begin:: Aside -->
 					<div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
 						<div class="kt-aside__brand-logo">
-							<a href="index.html">
+							<a href="{{route('admin.dashboard')}}">
 								<img alt="Logo" src="{{asset('backend_assets/media/logos/logo-12.png')}}">
 							</a>
 						</div>
@@ -40,7 +40,11 @@
 					<div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
 							<ul class="kt-menu__nav ">
-								<li class="kt-menu__item  kt-menu__item--active" aria-haspopup="true"><a href="index.html" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Dashboard</span></a></li>
+								<li class="kt-menu__item {{ (request()->is('admin')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{url('admin')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Dashboard</span></a></li>
+
+								<li class="kt-menu__item  {{ (request()->is('product')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.product.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-cogwheel"></i><span class="kt-menu__link-text">Products</span></a></li>
+
+								
 								<!-- <li class="kt-menu__section ">
 									<h4 class="kt-menu__section-text">Custom</h4>
 									<i class="kt-menu__section-icon flaticon-more-v2"></i>
@@ -58,7 +62,57 @@
 						@include('includes.backend_include.sidebar')	
 						<!-- begin:: Page -->
 						<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+							<!-- begin:: Subheader -->
+							<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+								<div class="kt-container  kt-container--fluid ">
+									<div class="kt-subheader__main">
+										<h3 class="kt-subheader__title">
+											@yield('title')
+										</h3>
+										<span class="kt-subheader__separator kt-hidden"></span>
+										<div class="kt-subheader__breadcrumbs">
+											
+										</div>
+									</div>
+									<div class="kt-subheader__toolbar">
+										<div class="kt-subheader__wrapper">
+											
+										
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- end:: Subheader -->
+							<!-- begin:: Content -->
+							<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+							<!-- Alert -->
+							 	@if(Session::has('success'))
+								<div class="alert alert-success fade show" role="alert">
+									<div class="alert-icon"><i class="flaticon-alert-2"></i></div>
+									<div class="alert-text">{{Session::get('success')}}</div>
+									<div class="alert-close">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true"><i class="la la-close"></i></span>
+										</button>
+									</div>
+								</div>
+					            @endif
+            					@if(Session::has('fail'))
+								<div class="alert alert-danger fade show" role="alert">
+									<div class="alert-icon"><i class="flaticon-warning"></i></div>
+									<div class="alert-text">{{Session::get('fail')}}</div>
+									<div class="alert-close">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true"><i class="la la-close"></i></span>
+										</button>
+									</div>
+								</div>
+							 	@endif
+							<!-- Alert -->
 							@yield('content')
+						</div>	
+						<!-- end:: Content -->
 						</div>	
 						<!-- end:: Page -->
 						<!-- begin:: Footer -->
@@ -227,8 +281,13 @@
 		<!--end::Page Vendors -->
 
 		<!--begin::Page Scripts(used by this page) -->
-		<script src="{{ asset('backend_assets/js/pages/dashboard.js') }}" type="text/javascript"></script>
 
+  @isset($front_scripts)
+    @foreach ($front_scripts as $script)
+      <script src="{{asset('backend_assets/'.$script)}}"></script>
+     
+    @endforeach
+ @endisset
 		<!--end::Page Scripts -->
 	</body>
 
