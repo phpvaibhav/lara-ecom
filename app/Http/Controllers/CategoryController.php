@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
-
+use View;
 class CategoryController extends Controller
 {
     /**
@@ -14,8 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+         $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+       return View::make('backend_pages.category.index',$data);
     }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+         $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+       return View::make('backend_pages.category.add',$data);
     }
 
     /**

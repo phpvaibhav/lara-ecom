@@ -39,10 +39,13 @@
 					<!-- begin:: Aside Menu -->
 					<div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
 						<div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
-							<ul class="kt-menu__nav ">
-								<li class="kt-menu__item {{ (request()->is('admin')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{url('admin')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Dashboard</span></a></li>
 
-								<li class="kt-menu__item  {{ (request()->is('product')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.product.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-cogwheel"></i><span class="kt-menu__link-text">Products</span></a></li>
+							<ul class="kt-menu__nav ">
+
+								<li class="kt-menu__item {{ (request()->is('admin/dashboard')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.dashboard')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Dashboard</span></a></li>
+
+								<li class="kt-menu__item  {{ (request()->is('admin/product')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.product.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-cogwheel"></i><span class="kt-menu__link-text">Products</span></a></li>
+								<li class="kt-menu__item  {{ (request()->is('admin/category')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-cogwheel"></i><span class="kt-menu__link-text">Categories</span></a></li>
 
 								
 								<!-- <li class="kt-menu__section ">
@@ -77,7 +80,7 @@
 									<div class="kt-subheader__toolbar">
 										<div class="kt-subheader__wrapper">
 											
-										
+									
 										</div>
 									</div>
 								</div>

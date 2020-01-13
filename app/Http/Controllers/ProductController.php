@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
      public function __construct()
     {
-        $this->middleware(['auth','is_admin']);
+       
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $data['front_scripts'] = array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
-       return View::make('backend_pages.products',$data);
+       return View::make('backend_pages.products.index',$data);
     }
 
     /**

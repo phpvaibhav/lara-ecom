@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('options');
+            $table->tinyInteger('status')->default('1')->comment('1:Active ,0:inactive');
             $table->timestamps();
             $table->softDeletes();
         });

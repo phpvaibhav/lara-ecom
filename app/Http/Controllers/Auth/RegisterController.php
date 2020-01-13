@@ -73,7 +73,7 @@ class RegisterController extends Controller
         Profile::create([
             'user_id'=>$user->id,
             'name'=>$user->name,
-        ])
+        ]);
         return $user;
     }
 }

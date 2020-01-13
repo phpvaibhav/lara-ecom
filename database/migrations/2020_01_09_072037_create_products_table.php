@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('discout_price');
             $table->string('thumbnail');
             $table->text('options');
+            $table->tinyInteger('status')->default('1')->comment('1:Active ,0:inactive');
             $table->timestamps();
             $table->softDeletes();
         });
