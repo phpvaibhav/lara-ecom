@@ -28,7 +28,12 @@
 						<a href="{{route('admin.category.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
 							<i class="la la-plus"></i>
 							New Category
+						</a>&nbsp;
+						<a href="{{route('admin.category.trash')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+							<i class="la la-trash"></i>
+							Trashed List
 						</a>
+						
 					</div>
 				</div>
 			</div>
@@ -46,6 +51,7 @@
 						
 						<th>Description</th>
 						<th>Created</th>
+						<!-- <th>Deleted</th> -->
 						<!-- <th>Status</th> -->
 						<th>Actions</th>
 					</tr>
@@ -68,14 +74,31 @@
 
 						</td>
 						<td> {!! $category->description !!}</td>
-						<td> {{date('d/m/Y',strtotime($category->created_at))}}</td>
+						<td>@if($category->trashed())
+							{{date('d/m/Y',strtotime($category->deleted_at))}}
+						@else {{date('d/m/Y',strtotime($category->created_at))}}
+						@endif
+					</td>
 						<!-- <td>
 							<span class="kt-badge  kt-badge--danger kt-badge--inline kt-badge--pill">Active</span></td> -->
 
-						<td><a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edit">
+						<td>
+						@if($category->trashed())	
+						<a href="{{route('admin.category.recover',$category->id)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Restore">
+                          <i class="la la-undo"></i>
+                        </a>
+                       
+                        @else
+                        <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edit">
                           <i class="la la-edit"></i>
-                        </a><a href="javascript:void(0);" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Delete" onclick="confirmDelete('{{$category->id}}')">
+                        </a>
+                         <a href="{{route('admin.category.remove',$category->slug)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Trash">
                           <i class="la la-trash"></i>
+                        </a>
+							
+                        @endif
+                        <a href="javascript:void(0);" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Delete" onclick="confirmDelete('{{$category->id}}')">
+                          <i class="la la-close"></i>
                         </a>
                          <form id="confirm-delete-form-{{$category->id}}" action="{{ route('admin.category.destroy',$category->id) }}" method="POST" style="display: none;">
                                         @csrf

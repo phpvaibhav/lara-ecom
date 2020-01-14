@@ -23,8 +23,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['as'=>'admin.','middleware'=>['auth','is_admin'],'prefix' => 'admin'],function(){
+	//Dashbord route
 	Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+	//Customize Route
+	Route::get('category/{category}/remove','CategoryController@remove')->name('category.remove');
+	Route::get('category/trash','CategoryController@trash')->name('category.trash');
+	Route::get('category/recover/{id}','CategoryController@recoverCat')->name('category.recover');
+	//Resource Route
 	Route::resource('product','ProductController');
 	Route::resource('category','CategoryController');
 	

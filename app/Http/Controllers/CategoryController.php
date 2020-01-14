@@ -21,6 +21,19 @@ class CategoryController extends Controller
        return View::make('backend_pages.category.index',$data);
     }
    
+/**
+     * Display a trashed listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+         $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+           $categories = Category::withTrashed()->paginate(3);
+         $data['categories'] = $categories;
+       return View::make('backend_pages.category.index',$data);
+    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -109,6 +122,14 @@ class CategoryController extends Controller
             return back()->with('fail','Something going wrong.');
         }
     }
+    public function recoverCat($id){
+        $category = Category::onlyTrashed()->findOrFail($id);
+        if($category->restore()){
+            return back()->with('success','Category restored successfully.');
+        }else{
+           return back()->with('fail','Something going wrong.'); 
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -118,9 +139,18 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if($category->delete()){
+        if($category->forceDelete()){
             return Redirect::to('admin/category')
        ->with('success','Category has been Deleted successfully.');
+        }else{
+            return back()->with('fail','Something going wrong.');
+        }
+    } 
+    public function remove(Category $category)
+    {
+        if($category->delete()){
+            return Redirect::to('admin/category')
+       ->with('success','Category has been trash successfully.');
         }else{
             return back()->with('fail','Something going wrong.');
         }
