@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
-use View;
+use View,Redirect;
+use Illuminate\Support\Arr;
 class CategoryController extends Controller
 {
     /**
@@ -15,6 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
          $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+           $categories = Category::paginate(3);
+         $data['categories'] = $categories;
        return View::make('backend_pages.category.index',$data);
     }
    
@@ -26,7 +29,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-         $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+         $data['front_scripts'] = array('js/pages/crud/forms/widgets/select2.js'); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+         $categories = Category::all();
+         $data['categories'] = $categories;
        return View::make('backend_pages.category.add',$data);
     }
 
@@ -38,7 +43,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'title' => 'required|min:5|max:25',
+        'slug' => 'required|unique:categories',
+        ]);
+        $categories = Category::create($request->only('title','description','slug'));
+        $categories->childens()->attach($request->parent_id);
+        if($categories){
+            return Redirect::to('admin/category')
+       ->with('success','Category has been added successfully.');
+        }else{
+            return back()->with('fail','Something going wrong.');
+        }
+
     }
 
     /**
@@ -60,7 +77,13 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+         $data['front_scripts'] = array('js/pages/crud/forms/widgets/select2.js'); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+         $categories = Category::all();
+         $data['category'] = $category;
+         $data['categories'] = $categories;
+         $ids = (isset($category->childens) && $category->childens->count() > 0)? Arr::pluck($category->childens, 'id'):null;
+         $data['ids'] = $ids;
+       return View::make('backend_pages.category.add',$data);
     }
 
     /**
@@ -72,7 +95,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+       $category->title = $request->title;
+       $category->slug = $request->slug;
+       $category->description = $request->description;
+       //detach children
+       $category->childens()->detach();
+       $category->childens()->attach($request->parent_id);
+       $saved = $category->save();
+       if($saved){
+            return Redirect::to('admin/category')
+       ->with('success','Category has been updated successfully.');
+        }else{
+            return back()->with('fail','Something going wrong.');
+        }
     }
 
     /**
@@ -83,6 +118,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->delete()){
+            return Redirect::to('admin/category')
+       ->with('success','Category has been Deleted successfully.');
+        }else{
+            return back()->with('fail','Something going wrong.');
+        }
     }
 }

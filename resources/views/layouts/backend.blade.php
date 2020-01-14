@@ -74,7 +74,7 @@
 										</h3>
 										<span class="kt-subheader__separator kt-hidden"></span>
 										<div class="kt-subheader__breadcrumbs">
-											
+											@yield('breadcrumbs')
 										</div>
 									</div>
 									<div class="kt-subheader__toolbar">
@@ -292,6 +292,7 @@
     @endforeach
  @endisset
 		<!--end::Page Scripts -->
+		<script src="{{asset('backend_assets/custom/js/common.js')}}" type="text/javascript"></script>
 	</body>
 
 	<!-- end::Body -->

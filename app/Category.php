@@ -14,6 +14,6 @@ class Category extends Model
     	return $this->belongsToMany('App\Product');
     }
     public function childens(){
-    	return $this->belongsToMany('Category::class','category_parent','category_id','parent_id');
+    	return $this->belongsToMany(Category::class,'category_parent','category_id','parent_id');
     }
 }
