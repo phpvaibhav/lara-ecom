@@ -30,6 +30,7 @@ Route::group(['as'=>'admin.','middleware'=>['auth','is_admin'],'prefix' => 'admi
 	Route::get('category/{category}/remove','CategoryController@remove')->name('category.remove');
 	Route::get('category/trash','CategoryController@trash')->name('category.trash');
 	Route::get('category/recover/{id}','CategoryController@recoverCat')->name('category.recover');
+	Route::view('product/extras','backend_pages.extras.extraoption')->name('product.extras');
 	//Resource Route
 	Route::resource('product','ProductController');
 	Route::resource('category','CategoryController');

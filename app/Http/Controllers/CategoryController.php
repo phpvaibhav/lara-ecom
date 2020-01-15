@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function trash()
     {
          $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
-           $categories = Category::withTrashed()->paginate(3);
+           $categories = Category::onlyTrashed()->paginate(3);
          $data['categories'] = $categories;
        return View::make('backend_pages.category.index',$data);
     }
@@ -91,7 +91,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
          $data['front_scripts'] = array('js/pages/crud/forms/widgets/select2.js'); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
-         $categories = Category::all();
+         $categories = Category::where('id','!=',$category->id)->get();
          $data['category'] = $category;
          $data['categories'] = $categories;
          $ids = (isset($category->childens) && $category->childens->count() > 0)? Arr::pluck($category->childens, 'id'):null;
@@ -139,7 +139,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if($category->forceDelete()){
+        if($category->childrens()->detach() && $category->forceDelete()){
             return Redirect::to('admin/category')
        ->with('success','Category has been Deleted successfully.');
         }else{

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use View;
+use App\Category;
 class ProductController extends Controller
 {
      public function __construct()
@@ -29,7 +30,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+         $data['front_scripts'] = array('js/pages/crud/forms/widgets/select2.js'); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+         $categories = Category::all();
+         $data['categories'] = $categories;
+       return View::make('backend_pages.products.add',$data);
     }
 
     /**

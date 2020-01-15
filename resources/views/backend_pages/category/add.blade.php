@@ -15,7 +15,7 @@
 			<div class="kt-portlet__head">
 				<div class="kt-portlet__head-label">
 					<h3 class="kt-portlet__head-title">
-				Base Controls
+				Base Information
 				</h3>
 				</div>
 			</div>

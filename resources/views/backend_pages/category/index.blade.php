@@ -92,7 +92,7 @@
                         <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Edit">
                           <i class="la la-edit"></i>
                         </a>
-                         <a href="{{route('admin.category.remove',$category->slug)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Trash">
+                         <a href="{{route('admin.category.remove',$category->id)}}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Trash">
                           <i class="la la-trash"></i>
                         </a>
 							
