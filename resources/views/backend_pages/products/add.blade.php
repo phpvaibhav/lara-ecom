@@ -40,7 +40,7 @@
 							</div>
 							<div class="form-group">
 								<label>Category</label>
-									<select class="form-control kt-select2" id="kt_select2_3" name="parent_id[]" multiple="multiple">
+									<select class="form-control kt-select2" id="kt_select2_3" name="category_id[]" multiple="multiple">
 										@if($categories)
 											@foreach($categories as $category)
 											<option value="{{$category->id}}"  > {{$category->title}}</option>
