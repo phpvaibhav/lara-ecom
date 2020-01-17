@@ -45,7 +45,9 @@
 								<li class="kt-menu__item {{ (request()->is('admin/dashboard')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.dashboard')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-architecture-and-city"></i><span class="kt-menu__link-text">Dashboard</span></a></li>
 
 								<li class="kt-menu__item  {{ (request()->is('admin/product')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.product.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-cogwheel"></i><span class="kt-menu__link-text">Products</span></a></li>
-								<li class="kt-menu__item  {{ (request()->is('admin/category')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-cogwheel"></i><span class="kt-menu__link-text">Categories</span></a></li>
+
+								<li class="kt-menu__item  {{ (request()->is('admin/category')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.category.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon2-cube-1"></i><span class="kt-menu__link-text">Categories</span></a></li>
+								<li class="kt-menu__item  {{ (request()->is('admin/profile')) ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{route('admin.profile.index')}}" class="kt-menu__link "><i class="kt-menu__link-icon flaticon-users-1"></i><span class="kt-menu__link-text">Customers</span></a></li>
 
 								
 								<!-- <li class="kt-menu__section ">

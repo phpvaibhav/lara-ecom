@@ -15,10 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
-           $categories = Category::paginate(3);
-         $data['categories'] = $categories;
-       return View::make('backend_pages.category.index',$data);
+        $data['front_scripts'] = array(); //array('js/pages/crud/datatables/data-sources/ajax-server-side.js');
+        $categories         = Category::paginate(3);
+        $data['categories'] = $categories;
+        return View::make('backend_pages.category.index',$data);
     }
    
 /**
@@ -108,6 +108,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $request->validate([
+        'title' => 'required|min:5|max:25',
+        'slug' => 'required|unique:categories',
+        ]);
        $category->title = $request->title;
        $category->slug = $request->slug;
        $category->description = $request->description;

@@ -53,7 +53,7 @@
 					</div>
 					<div class="form-group form-group-last">
 						<label for="exampleTextarea">Decription</label>
-						<textarea name="description" class="form-control" data-provide="markdown" rows="10">@if(isset($category->description)) {!! $category->description!!} @else {!!old('description')!!}  @endif</textarea>
+						<textarea name="description" class="form-control" data-provide="markdown" rows="10">@if(isset($category->description)) {!! $category->description!!} @else {!! old('description') !!}  @endif</textarea>
 												
 					</div>
 				</div>

@@ -6,7 +6,7 @@
 	<!-- <a href="" class="kt-subheader__breadcrumbs-link">
 											Forms </a>
 										<span class="kt-subheader__breadcrumbs-separator"></span> -->
-	<span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Category</span>
+	<span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Customers</span>
 @endsection
 @section('content')
 

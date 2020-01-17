@@ -28,7 +28,8 @@ class AdminUser extends Seeder
         	'role_id' => $role->id
         ]);  
         $profile = Profile::create([
-        	'user_id'=> $user->id,
+        	'user_id' => $user->id,
+            'slug'    => round(111,9990).time().'_'.$user->id,
         
         ]); 
     }
